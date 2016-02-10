@@ -85,69 +85,69 @@ var app = angular.module('egmobile', ['ionic', 'ngFitText', 'angularUtils.direct
         url: '/',
         views: {
             'account@': {
-                templateUrl: 'template/account.html',
+                templateUrl: 'templates/account.html',
                 controller: 'AccountCtrl',
             },
             'main@':{
                 template: '<ui-view/>'
             },
             'menu@':{
-                templateUrl: 'template/menu.html'
+                templateUrl: 'templates/menu.html'
             }
         }
     })
 
     .state('main.search', {
         url: 'search?query&format&sort&availability&loc&qtype',
-        templateUrl: 'template/search.html',
+        templateUrl: 'templates/search.html',
         controller: 'SearchCtrl',
     })
 
     .state('main.home', {
         url: 'home',
-        templateUrl: 'template/home.html',
+        templateUrl: 'templates/home.html',
         controller: 'HomeCtrl',
     })
 
     .state('main.holds', {
         url: 'holds',
-        templateUrl: 'template/holds.html',
+        templateUrl: 'templates/holds.html',
         controller: 'HoldsCtrl',
     })
 
     .state('main.checkouts', {
         url: 'checkouts',
-        templateUrl: 'template/checkouts.html',
+        templateUrl: 'templates/checkouts.html',
         controller: 'CheckoutCtrl',
     })
 
     .state('main.card',{
         url: 'card',
-        templateUrl: 'template/card.html',
+        templateUrl: 'templates/card.html',
         controller: 'CardCtrl',
     })
 
     .state('main.locations',{
         url: 'locations',
-        templateUrl: 'template/locations.html',
+        templateUrl: 'templates/locations.html',
         controller: 'LocationCtrl',
     })
 
     .state('main.events',{
         url: 'events',
-        templateUrl: 'template/events.html',
+        templateUrl: 'templates/events.html',
         controller: 'EventsCtrl',
     })
 
     .state('main.news',{
         url: 'news',
-        templateUrl: 'template/news.html',
+        templateUrl: 'templates/news.html',
         controller: 'NewsCtrl',
     })
 
     .state('main.featured',{
         url: 'featured',
-        templateUrl: 'template/featured.html',
+        templateUrl: 'templates/featured.html',
         controller: 'FeaturedCtrl',
     })
 
@@ -716,7 +716,7 @@ app.factory('node_details', function($http, $ionicModal, $rootScope, popup) {
     return {
         show: function(nid, $scope) {
             $scope = $scope || $rootScope.$new();
-            $ionicModal.fromTemplateUrl('template/node_modal.html', function(modal) {
+            $ionicModal.fromTemplateUrl('templates/node_modal.html', function(modal) {
                 $scope.modal = modal;
             },
             {
@@ -755,7 +755,7 @@ app.factory('item_details', function($http, $ionicModal, $rootScope, popup) {
     return {
         show: function(record_id, $scope) {
             $scope = $scope || $rootScope.$new();
-            $ionicModal.fromTemplateUrl('template/item_modal.html', function(modal) {
+            $ionicModal.fromTemplateUrl('templates/item_modal.html', function(modal) {
                 $scope.modal = modal;
             },
             {
