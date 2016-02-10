@@ -1,0 +1,20 @@
+<div class="list make_fast">
+    <div class="center">
+        <img class="logo" src="img/logo-banner-256.png" />
+    </div>
+    <div class="links card padding" ng-hide="$exposeAside.active">
+        <button class="button button-block button-positive" ui-sref="main.search"><i class="icon ion-search"></i> Search the Catalog</button>
+        <button class="button button-block button-positive" ui-sref="main.locations"><i class="icon ion-compass"></i> Hours &amp; Locations</button>
+        <button class="button button-block button-positive" menu-toggle="right"><i class="icon ion-person"></i> My Account</button>
+        <button class="button button-block button-positive" ui-sref="main.events"><i class="icon ion-calendar"></i> Upcoming Events</button>
+        <button class="button button-block button-positive" ui-sref="main.news"><i class="icon ion-flag"></i> District News</button>
+        <button class="button button-block button-positive" ui-sref="main.featured"><i class="icon ion-star"></i> Featured Items</button>
+    </div>
+    <div ng-show="$exposeAside.active && development" class="center">
+        <ion-slide-box show-pager="false">
+            <ion-slide ng-repeat="item in items">
+                <div><img style="width:200px;" ng-src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{item.record_id}}" ng-click="item_details({{item.record_id}})" /></div>
+            </ion-slide>
+        </ion-slide-box>
+    </div>
+</div>

@@ -1,5 +1,94 @@
-<ion-view view-title="Search">
-  <ion-content>
-    <h1>Search</h1>
-  </ion-content>
-</ion-view>
+<div class="list make_fast">
+    <div class="item item-input-inset">
+        <i class="button-clear icon ion-settings" title="Search Settings" name="Search Settings" ng-click="toggle_advanced()" style="color:#434343;"></i>
+        <label class="item-input-wrapper">
+            <input type="text" ng-model="query" placeholder="Search the Catalog" ng-enter="search()" id="searchBox" />
+        </label>
+        <div style="background-color:#434343;padding:4px;margin-right:5px;border-top-right-radius:4px;border-bottom-right-radius:4px;" ng-click="search()">
+            <i class="button-clear icon ion-search" style="color:#fff;"></i>
+        </div>
+        <i class="button-clear icon ion-close-circled" title="Reset Search" name="Reset Search" ng-click="resetSearch()" style="color:#434343;"></i>
+    </div>
+    <div id="search_options" ng-show="advance_search == true">
+        <label class="item item-input item-select">
+            <div class="input-label">Location</div>
+            <select ng-model="loc" ng-init="loc = loc || '22'">
+                <option value="22" selected>All</option>
+                <option value="23">Woodmere</option>
+                <option value="25">Kingsley</option>
+                <option value="24">Interlochen</option>
+                <option value="26">Peninsula</option>
+                <option value="28">East Bay</option>
+                <option value="27">Fife Lake</option>
+            </select> 
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">Search Type</div>
+            <select ng-model="qtype" ng-init="qtype = qtype || 'keyword'">
+                <option value="keyword" selected>Keyword</option>
+                <option value="title">Title</option>
+                <option value="author">Author / Group</option>
+                <option value="subject">Subject</option>
+            </select>
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">Media Type</div>
+            <select ng-model="format" ng-init="format = format || 'all'">
+                <option value="all">All</option>
+                <option value="a">Books</option>
+                <option value="g">Movies</option>
+                <option value="j">Music</option>
+            </select>
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">Sort By</div>
+            <select ng-model="sort" ng-init="sort = sort || 'relevance'">
+                <option value="relevance">Relevance</option>
+                <option value="pubdate.descending">Newest to Oldest</option>
+                <option value="pubdate">Oldest to Newest</option>
+                <option value="titlesort">A to Z</option>
+                <option value="titlesort.descending">Z to A</option>
+            </select>
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">Only Show Available Items</div>
+            <select ng-model="availability" ng-init="availability = availability || 'off'" >
+                <option value="off">Off</option>
+                <option value="yes">On</option>
+            </select>
+        </label>
+    </div>
+    <div class="card make_fast" dir-paginate="result in results | itemsPerPage: 10: 'search'" pagination-id="search">
+        <div class="item item-avatar">
+            <img ng-src="{{result.format_icon}}" err-src="img/clocktower100.png" />
+            <h2>{{result.title}}</h2>
+            <p>{{result.author}}</p>
+        </div>
+        <div class="item item-text-wrap row" style="min-height: 150px;">
+            <div class="col col-33">
+                <img class="cover_search_results" ng-src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{result.record_id}}" err-src="img/clocktower100.png" />
+            </div>
+            <div class="col col-66">
+                <div ng-show="result.availability.length">{{result.availability}}</div>
+                <div class="padtop" ng-show="result.call_number">
+                    <strong>{{result.call_number}}</strong>
+                </div>
+            </div>
+        </div>
+        <div class="item item-text-wrap row" ng-show="result.abstract || result.contents">
+            <div class="col col-100">
+                <p ng-show="result.abstract">{{result.abstract}}</p>
+                <p ng-show="result.contents">{{result.contents}}</p>
+            </div>
+        </div>
+        <div class="item">
+            <button class="button button-positive" ng-click="item_details('{{result.record_id}}')">More Info</button>
+            <button id="hold_{{result.record_id}}" ng-show="logged_in && !result.eresource" class="button button-positive" ng-click="place_hold('{{result.record_id}}')">Place Hold</button>
+            <button ng-show="!logged_in && !result.eresource" class="button button-positive" menu-toggle="right">Log in to hold</button>
+            <button ng-show="result.eresource" class="button button-positive" ng-click="openLink('{{result.eresource}}')">Connect</button>
+        </div>
+    </div>
+    <dir-pagination-controls on-page-change="scroll_top(); pageChanged(newPageNumber)" pagination-id="search">
+    </dir-pagination-controls>
+    <ion-infinite-scroll style="display: none" ng-if="more_results == 'true'" on-infinite="search('true','{{ pagination.currentPage }}')" distance="70%"></ion-infinite-scroll>
+</div>
