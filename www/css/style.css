@@ -125,11 +125,6 @@ div.menu_div:hover {
     text-align: center;
 }
 
-.make_fast {
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-}
-
 img.logo {
     height: 100px;
 }

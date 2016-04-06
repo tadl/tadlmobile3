@@ -1,4 +1,4 @@
-<div id="login-box" class="list make_fast" ng-hide="$root.logged_in == true">
+<div id="login-box" class="list" ng-hide="$root.logged_in == true">
     <label class="item item-input">
         <span class="input-label">Username</span>
         <input type="text" autocorrect="off" autocapitalize="off" ng-model="username">
@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div id="login-box" class="list make_fast" ng-show="$root.logged_in == true">
+<div id="login-box" class="list" ng-show="$root.logged_in == true">
     <div class='list'>
         <div class="item item-divider">
             {{$root.user_basic.full_name}}

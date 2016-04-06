@@ -27,8 +27,8 @@
         <ion-side-menus>
             <ion-side-menu-content ng-controller="MenuCtrl">
                 <ion-header-bar class="bar-solid">
-                    <button class="button button-icon" menu-toggle="left" ng-hide="$exposeAside.active">
-                        <i class="icon" ng-class="{false: 'ion-navicon-round', true: 'ion-chevron-left'}[openLeft && !$exposeAside.active]"></i>
+                    <button class="button button-icon" menu-toggle="left">
+                        <i class="icon" ng-class="{false: 'ion-navicon-round', true: 'ion-chevron-left'}[openLeft]"></i>
                     </button>
                     <h1 class="title" data-fittext="1.745" data-fittext-max="24">Traverse Area District Library</h1>
                     <button class="button button-icon" menu-toggle="right">
@@ -36,23 +36,23 @@
                     </button>
                 </ion-header-bar>
                 <ion-content>
-                    <ui-view name="main" class="make_fast" />
+                    <ui-view name="main" />
                 </ion-content>
             </ion-side-menu-content>
-            <ion-side-menu side="left" class="make_fast" expose-aside-when="(min-width:840px)">
+            <ion-side-menu side="left">
                 <ion-header-bar class="bar-stable">
                     <h1 class="title">Main Menu</h1>
                 </ion-header-bar>
                 <ion-content>
-                    <div ui-view name="menu" class="make_fast"></div>
+                    <div ui-view name="menu"></div>
                 </ion-content>
             </ion-side-menu>
-            <ion-side-menu side="right" class="make_fast">
+            <ion-side-menu side="right">
                 <ion-header-bar class="bar-stable">
                     <h1 class="title">My Account</h1>
                 </ion-header-bar>
                 <ion-content>
-                    <div ui-view name="account" class="make_fast"></div>
+                    <div ui-view name="account"></div>
                 </ion-content>
             </ion-side-menu>
         </ion-side-menus>
