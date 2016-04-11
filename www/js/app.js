@@ -191,18 +191,18 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
         $scope.current_page = newPage;
     };
     $scope.search = function(more) {
-        if (more != 'true') {
+        if (more != true) {
             $scope.current_page = 1
             $scope.page = 0;
             $rootScope.show_loading('Searching...');
             var paused = false
-        }else{
+        } else {
             $scope.loaded_results = $scope.results.length
             $scope.results_limitation = ($scope.current_page * 10)
-            if(($scope.loaded_results - $scope.results_limitation) >= 20){
+            if(($scope.loaded_results - $scope.results_limitation) >= 20) {
                 var paused = true
                 $scope.$broadcast('scroll.infiniteScrollComplete')
-            }else{
+            } else {
                 var paused = false
             }
         }
@@ -223,7 +223,7 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
 
         search_params['page'] = $scope.page;
 
-        if( paused != true){
+        if (paused != true) {
             $http({
                 method: 'GET',
                 url: ilsSearchBasic,
@@ -240,7 +240,7 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
                 $scope.page = data.page
                 $scope.more_results = data.more_results;
                 $scope.new_results = data.results
-                if (more == 'true') {
+                if (more == true) {
                     $scope.results = $scope.results.concat($scope.new_results);
                     $scope.page++;
                 } else {

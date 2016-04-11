@@ -5,10 +5,9 @@ body {
 }
 
 .cover_search_results {
-    width: 100%;
-    max-width: 200px;
     float: left;
     margin: 0 10px 0 0;
+    width:100%;
 }
 
 .big_loading {
