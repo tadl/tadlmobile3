@@ -201,7 +201,6 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
             $scope.results_limitation = ($scope.current_page * 10)
             if(($scope.loaded_results - $scope.results_limitation) >= 20) {
                 var paused = true
-                $scope.$broadcast('scroll.infiniteScrollComplete')
             } else {
                 var paused = false
             }
@@ -214,6 +213,8 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
         search_params['availability'] = $scope.availability;
         search_params['loc'] = $scope.loc;
         search_params['qtype'] = $scope.qtype;
+
+        var morebutton = '<button class="button button-positive button-full" ng-if="more_results == true" ng-click="search(true)">Load more results</button>';
 
         if ($stateParams.query != $scope.query || $stateParams.format != $scope.format || $stateParams.sort != $scope.sort || $stateParams.availability != $scope.availability || $stateParams.loc != $scope.loc || $stateParams.qtype != $scope.qtype) {
             $scope.current_search = $scope.query;
@@ -238,7 +239,9 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
                     }
                 });
                 $scope.page = data.page
-                $scope.more_results = data.more_results;
+                $scope.more_results = (data.more_results == "true");
+                console.log(data.more_results);
+                console.log(data.results);
                 $scope.new_results = data.results
                 if (more == true) {
                     $scope.results = $scope.results.concat($scope.new_results);
@@ -247,7 +250,6 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
                     $scope.results = data.results;
                     $scope.page++;
                 }
-                $scope.$broadcast('scroll.infiniteScrollComplete');
             }).error(function() {
                 $rootScope.hide_loading();
                 popup.alert('Oops', 'An error has occurred, please try again.');
