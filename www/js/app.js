@@ -195,15 +195,8 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
             $scope.current_page = 1
             $scope.page = 0;
             $rootScope.show_loading('Searching...');
-            var paused = false
         } else {
-            $scope.loaded_results = $scope.results.length
-            $scope.results_limitation = ($scope.current_page * 10)
-            if(($scope.loaded_results - $scope.results_limitation) >= 20) {
-                var paused = true
-            } else {
-                var paused = false
-            }
+            $rootScope.show_loading('Loading more results...');
         }
 
         var search_params = {};
@@ -214,8 +207,6 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
         search_params['loc'] = $scope.loc;
         search_params['qtype'] = $scope.qtype;
 
-        var morebutton = '<button class="button button-positive button-full" ng-if="more_results == true" ng-click="search(true)">Load more results</button>';
-
         if ($stateParams.query != $scope.query || $stateParams.format != $scope.format || $stateParams.sort != $scope.sort || $stateParams.availability != $scope.availability || $stateParams.loc != $scope.loc || $stateParams.qtype != $scope.qtype) {
             $scope.current_search = $scope.query;
             $location.path('/search').search(search_params);
@@ -224,37 +215,34 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
 
         search_params['page'] = $scope.page;
 
-        if (paused != true) {
-            $http({
-                method: 'GET',
-                url: ilsSearchBasic,
-                timeout: 15000,
-                params: search_params
-            }).success(function(data) {
-                $rootScope.hide_loading();
-                jQuery.each(data.results, function() {
-                    if (this.availability.length) {
-                        var tmpavail = this.availability.pop();
-                        this.availability = tmpavail;
-                    }
-                });
-                $scope.page = data.page
-                $scope.more_results = (data.more_results == "true");
-                console.log(data.more_results);
-                console.log(data.results);
-                $scope.new_results = data.results
-                if (more == true) {
-                    $scope.results = $scope.results.concat($scope.new_results);
-                    $scope.page++;
-                } else {
-                    $scope.results = data.results;
-                    $scope.page++;
+        $http({
+            method: 'GET',
+            url: ilsSearchBasic,
+            timeout: 15000,
+            params: search_params
+        }).success(function(data) {
+            jQuery.each(data.results, function() {
+                if (this.availability.length) {
+                    var tmpavail = this.availability.pop();
+                    this.availability = tmpavail;
                 }
-            }).error(function() {
-                $rootScope.hide_loading();
-                popup.alert('Oops', 'An error has occurred, please try again.');
             });
-        }
+            $scope.page = data.page
+            $scope.more_results = (data.more_results == "true");
+            $scope.new_results = data.results
+            if (more == true) {
+                $scope.results = $scope.results.concat($scope.new_results);
+                $scope.page++;
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            } else {
+                $scope.results = data.results;
+                $scope.page++;
+            }
+            $rootScope.hide_loading();
+        }).error(function() {
+            $rootScope.hide_loading();
+            popup.alert('Oops', 'An error has occurred, please try again.');
+        });
     };
 
     $scope.item_details = function(record_id) {
@@ -616,7 +604,6 @@ app.controller('FeaturedCtrl',function($scope, $rootScope, $http, $ionicLoading,
             url: featuredItems,
             timeout: 15000,
         }).success(function(data) {
-            console.log(data.nodes);
             $scope.featured = data.nodes;
             $rootScope.hide_loading();
         }).error(function() {
