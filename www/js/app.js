@@ -185,7 +185,7 @@ app.controller('MenuCtrl', function($scope, $rootScope, $timeout, $ionicSideMenu
 
 // Search Controller
 app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $stateParams, $timeout, popup, hold, item_details) {
-    $scope.advance_search = false;
+    $scope.advanced_search = false;
     $scope.results = [];
     $scope.pageChanged = function(newPage) {
         $scope.current_page = newPage;
@@ -268,10 +268,10 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
     }
 
     $scope.toggle_advanced = function() {
-        if ($scope.advance_search == false) {
-            $scope.advance_search = true;
+        if ($scope.advanced_search == false) {
+            $scope.advanced_search = true;
         } else {
-            $scope.advance_search = false;
+            $scope.advanced_search = false;
         }
     }
 
@@ -287,7 +287,7 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
     $scope.qtype = $stateParams.qtype;
 
     if (($scope.format != 'all') || ($scope.sort != 'relevance') || ($scope.loc != '22') || ($scope.availability != 'off') || ($scope.qtype != 'keyword')) {
-        $scope.advance_search = true;
+        $scope.advanced_search = true;
     }
 
     if (($scope.query != null) || ($scope.current_search != $scope.query)) {
