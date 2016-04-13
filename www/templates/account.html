@@ -5,7 +5,7 @@
     </label>
     <label class="item item-input">
         <span class="input-label">Password</span>
-        <input type="password" ng-model="password" ng-enter="login()">
+        <input type="password" ng-model="password" ng-keyup="$event.keyCode===13 && login()">
     </label>
     <div style="margin:15px;">
         <button class="item button button-stable" ng-click="login()">Login</button>

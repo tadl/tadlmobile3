@@ -221,12 +221,11 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
             timeout: 15000,
             params: search_params
         }).success(function(data) {
-            jQuery.each(data.results, function() {
-                if (this.availability.length) {
-                    var tmpavail = this.availability.pop();
-                    this.availability = tmpavail;
+            for (index = 0; index < data.results.length; ++index) {
+                if (data.results[index].availability.length) {
+                    data.results[index].availability = data.results[index].availability.toString();
                 }
-            });
+            }
             $scope.page = data.page
             $scope.more_results = (data.more_results == "true");
             $scope.new_results = data.results
@@ -856,20 +855,6 @@ app.factory('hold', function($http, $rootScope, $ionicPopup, login, popup) {
     }
 
     return self;
-});
-
-// ng-enter Directive
-app.directive('ngEnter', function() {
-    return function(scope, element, attrs) {
-        element.bind("keydown keypress", function(event) {
-            if(event.which === 13) {
-                scope.$apply(function() {
-                    scope.$eval(attrs.ngEnter);
-                });
-                event.preventDefault();
-            }
-        });
-    };
 });
 
 // err-src directive
