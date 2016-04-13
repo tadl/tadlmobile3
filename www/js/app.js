@@ -1,15 +1,27 @@
 // Set up all URLs as vars
-var ilsCatcherBase = 'https://apiv2.catalog.tadl.org/';
-var ilsSearchBasic = ilsCatcherBase + 'search/basic';
+//var ilsCatcherBase = 'https://apiv2.catalog.tadl.org/';
+var ilsCatcherBase = 'https://catalog.tadl.org/';
+//var ilsSearchBasic = ilsCatcherBase + 'search/basic';
+var ilsSearchBasic = ilsCatcherBase + 'main/search.json';
+//var ilsItemDetails = ilsCatcherBase + 'items/details';
 var ilsItemDetails = ilsCatcherBase + 'items/details';
+//var ilsAccountHolds = ilsCatcherBase + 'account/holds';
 var ilsAccountHolds = ilsCatcherBase + 'account/holds';
+//var ilsAccountCheckouts = ilsCatcherBase + 'account/checkouts';
 var ilsAccountCheckouts = ilsCatcherBase + 'account/checkouts';
+//var ilsAccountRenew = ilsCatcherBase + 'account/renew_items';
 var ilsAccountRenew = ilsCatcherBase + 'account/renew_items';
+//var ilsAccountLogin = ilsCatcherBase + 'account/login';
 var ilsAccountLogin = ilsCatcherBase + 'account/login';
+//var ilsAccountLogout = ilsCatcherBase + 'account/logout';
 var ilsAccountLogout = ilsCatcherBase + 'account/logout';
+//var ilsAccountRefresh = ilsCatcherBase + 'account/login_refresh';
 var ilsAccountRefresh = ilsCatcherBase + 'account/login_refresh';
+//var ilsAccountToken = ilsCatcherBase + 'account/check_token';
 var ilsAccountToken = ilsCatcherBase + 'account/check_token';
+//var ilsAccountHoldsPlace = ilsCatcherBase + 'account/place_holds';
 var ilsAccountHoldsPlace = ilsCatcherBase + 'account/place_holds';
+//var ilsPasswordReset = ilsCatcherBase + 'account/password_reset';
 var ilsPasswordReset = ilsCatcherBase + 'account/password_reset';
 var webLocations = ilsCatcherBase + 'web/locations';
 var webEvents = ilsCatcherBase + 'web/events';
@@ -200,9 +212,10 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
         }
 
         var search_params = {};
+        // https://catalog.tadl.org/main/search.json?utf8=%E2%9C%93&query=baseball&layout=grid&commit=&%5Bqtype%5D=keyword&%5Bfmt%5D=all&%5Bsort%5D=relevancy&%5Bloc%5D=22&%5Bin_progress%5D=true
         search_params['query'] = $scope.query;
-        search_params['format'] = $scope.format;
-        search_params['sort'] = $scope.sort;
+        search_params['fmt'] = $scope.format;
+        search_params['sort'] = 'relevancy';
         search_params['availability'] = $scope.availability;
         search_params['loc'] = $scope.loc;
         search_params['qtype'] = $scope.qtype;
@@ -221,21 +234,24 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
             timeout: 15000,
             params: search_params
         }).success(function(data) {
+            /*
             jQuery.each(data.results, function() {
                 if (this.availability.length) {
                     var tmpavail = this.availability.pop();
                     this.availability = tmpavail;
                 }
             });
+            */
             $scope.page = data.page
             $scope.more_results = (data.more_results == "true");
-            $scope.new_results = data.results
+            $scope.new_results = data.items
+            console.log(data.items)
             if (more == true) {
                 $scope.results = $scope.results.concat($scope.new_results);
                 $scope.page++;
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             } else {
-                $scope.results = data.results;
+                $scope.results = data.new_results;
                 $scope.page++;
             }
             $rootScope.hide_loading();
