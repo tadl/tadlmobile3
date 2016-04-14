@@ -184,7 +184,7 @@ app.controller('MenuCtrl', function($scope, $rootScope, $timeout, $ionicSideMenu
 });
 
 // Search Controller
-app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $stateParams, $timeout, popup, hold, item_details) {
+app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $stateParams, $timeout, popup, hold, item_details, itemDetail) {
     $scope.advanced_search = false;
     $scope.results = [];
     $scope.pageChanged = function(newPage) {
@@ -244,8 +244,11 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
         });
     };
 
-    $scope.item_details = function(record_id) {
-        item_details.show(record_id);
+    $scope.details = function(record_id) {
+        //item_details.show(record_id);
+        itemDetail.get(record_id).then(function(data) {
+            console.log(data);
+        });
     };
 
     $scope.showAlert = function(title,message) {
@@ -738,17 +741,39 @@ app.factory('node_details', function($http, $ionicModal, $rootScope, popup) {
     }
 });
 
+// New Details factory
+app.factory('itemDetail', function($http,$rootScope) {
+    var item = [];
+
+    return {
+        get: function(record_id) {
+            $rootScope.show_loading('bla bla');
+            return $http({
+                        method: 'GET',
+                        url: ilsItemDetails,
+                        params: {"record": record_id},
+                        timeout: 15000,
+            }).then(function(response) {
+                item = response;
+                $rootScope.hide_loading();
+                return item.data;
+            });
+            return null;
+        }
+    }
+});
+
 // Item Modal factory
 app.factory('item_details', function($http, $ionicModal, $rootScope, popup) {
     return {
-        show: function(record_id, $scope) {
-            $scope = $scope || $rootScope.$new();
-            $ionicModal.fromTemplateUrl('templates/item_modal.html', function(modal) {
-                $scope.modal = modal;
-            },
-            {
+        show: function(record_id) {
+            $scope = $rootScope.$new();
+            $ionicModal.fromTemplateUrl('templates/item_modal.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
+            }).then(function(modal) {
+                $scope.modal = modal;
+                console.log($scope.modal);
             });
             $scope.openModal = function() {
                 $scope.modal.show();
@@ -756,7 +781,12 @@ app.factory('item_details', function($http, $ionicModal, $rootScope, popup) {
             $scope.closeModal = function() {
                 $scope.modal.hide();
             };
+            $scope.$on('$destroy', function() {
+                $scope.modal.remove();
+            });
+
             $rootScope.show_loading('Loading&nbsp;details...');
+
             $http({
                 method: 'GET',
                 url: ilsItemDetails,

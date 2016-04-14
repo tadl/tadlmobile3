@@ -69,10 +69,10 @@
                 <div ng-show="result.availability.length">{{result.availability}}</div>
                 <div class="padtop" ng-show="result.call_number"><strong>{{result.call_number}}</strong></div>
                 <div>
-                    <button class="button button-positive" ng-click="item_details('{{result.record_id}}')">More Info</button>
-                    <button id="hold_{{result.record_id}}" ng-show="logged_in && !result.eresource" class="button button-positive" ng-click="place_hold('{{result.record_id}}')">Place Hold</button>
+                    <button class="button button-positive" ng-click="details(result.record_id)">More Info</button>
+                    <button id="hold_{{result.record_id}}" ng-show="logged_in && !result.eresource" class="button button-positive" ng-click="place_hold(result.record_id)">Place Hold</button>
                     <button ng-show="!logged_in && !result.eresource" class="button button-positive" menu-toggle="right">Log in to hold</button>
-                    <button ng-show="result.eresource" class="button button-positive" ng-click="openLink('{{result.eresource}}')">Connect</button>
+                    <button ng-show="result.eresource" class="button button-positive" ng-click="openLink(result.eresource)">Connect</button>
                 </div>
             </div>
         </div>
