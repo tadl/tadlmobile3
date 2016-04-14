@@ -1,7 +1,7 @@
 // Set up all URLs as vars
 var ilsCatcherBase = 'https://apiv2.catalog.tadl.org/';
 var ilsSearchBasic = ilsCatcherBase + 'search/basic';
-var ilsItemDetails = ilsCatcherBase + 'items/details';
+var ilsItemDetails = 'https://catalog.tadl.org/main/details.json';
 var ilsAccountHolds = ilsCatcherBase + 'account/holds';
 var ilsAccountCheckouts = ilsCatcherBase + 'account/checkouts';
 var ilsAccountRenew = ilsCatcherBase + 'account/renew_items';
@@ -184,7 +184,7 @@ app.controller('MenuCtrl', function($scope, $rootScope, $timeout, $ionicSideMenu
 });
 
 // Search Controller
-app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $stateParams, $timeout, popup, hold, item_details, itemDetail) {
+app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $stateParams, $timeout, popup, hold, itemDetail, $ionicModal) {
     $scope.advanced_search = false;
     $scope.results = [];
     $scope.pageChanged = function(newPage) {
@@ -245,10 +245,24 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
     };
 
     $scope.details = function(record_id) {
-        //item_details.show(record_id);
         itemDetail.get(record_id).then(function(data) {
-            console.log(data);
+            $scope.item = data;
+            $ionicModal.fromTemplateUrl('templates/item_modal.html', {
+                scope: $scope
+            }).then(function(modal) {
+                $scope.modal = modal;
+                modal.show();
+                $scope.closeModal = function() {
+                    modal.hide();
+                }
+            });
+
+            console.log($scope.item);
         });
+
+
+
+        //item_details.show(record_id);
     };
 
     $scope.showAlert = function(title,message) {
@@ -741,17 +755,49 @@ app.factory('node_details', function($http, $ionicModal, $rootScope, popup) {
     }
 });
 
+// New Modal factory
+app.service('ModalService', function($ionicModal,$rootScope) {
+    var init = function(tpl, $scope) {
+        var promise;
+        $scope = $scope || $rootScope.$new();
+
+        promise = $ionicModal.fromTemplateUrl(tpl, {
+            scope: $scope,
+            animation: 'slide-up-in'
+        }).then(function(modal) {
+            $scope.modal = modal;
+            return modal;
+        });
+
+        $scope.openModal = function() {
+            $scope.modal.show();
+        }
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        }
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
+
+        return promise;
+    }
+
+    return {
+        init: init
+    }
+});
+
 // New Details factory
 app.factory('itemDetail', function($http,$rootScope) {
     var item = [];
 
     return {
         get: function(record_id) {
-            $rootScope.show_loading('bla bla');
+            $rootScope.show_loading('Loading details...');
             return $http({
                         method: 'GET',
                         url: ilsItemDetails,
-                        params: {"record": record_id},
+                        params: {"id": record_id},
                         timeout: 15000,
             }).then(function(response) {
                 item = response;

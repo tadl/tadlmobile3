@@ -8,54 +8,44 @@
     <ion-content padding="true">
         <div class="item item-text-wrap">
             <div class="row">
-                <span class="detail_title">{{title}}</span>
+                <span class="detail_title">{{item.title}}</span>
             </div>
             <div class="row">
                 <div class="col col-33">
-                    <img ng-src="{{details.image}}" err-src="img/clocktower100.png" class="cover_item_details" />
+                    <img ng-src="https://catalog.tadl.org/opac/extras/ac/jacket/large/r/{{item.id}}" err-src="img/clocktower100.png" class="cover_item_details" />
                 </div>
                 <div class="col col-67">
-                    <span class="detail_key">{{details.author}}</span>
-                    <div class="padding-top" ng-show="copies_on_shelf.length && $exposeAside.active">
-                        <span class="detail_title">Copies on the shelf at</span>
-                        <div ng-repeat="location in locations">
-                            <span class="detail_key">{{location}}</span>
-                            <div ng-repeat="copy in copies_on_shelf">
-                              <div class="row responsive-sm" ng-if="copy.location == location">
-                                {{copy.shelving_location}} &raquo; {{copy.call_number}}
+                    <span class="detail_key" ng-show="item.author">{{item.author}}</span>
+                    <div class="padding-top" ng-show="item.availability.length">
+                        <span class="detail_title">Copies on the shelf</span>
+                        <div ng-repeat="location in item.availability">
+                            <span class="detail_key">{{location.library}}</span>
+                            <div ng-repeat="copy in location.copies">
+                              <div class="row responsive-sm">
+                                {{copy.count}} in {{copy.shelf_location}} &raquo; {{copy.call_numbers.toString()}}
                               </div>
                             </div>
                         </div>
                     </div>
-                    <div class="padding-top" ng-show="copies.length && $exposeAside.active && !copies_on_shelf.length">
+                    <div class="padding-top" ng-show="item.holdings.length && !item.availability.length">
                         <span class="detail_key">Call Number: </span>
-                        <span class="detail_value">{{copies.0.call_number}}</span>
+                        <span class="detail_value">{{item.call_number}}</span>
+                    </div>
+                    <div class="padding-top" ng-show="item.electronic != false">
+                        <div class="detail_key">Electronic Resource</div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col col-100">
-                    <div ng-show="copies.length && !$exposeAside.active && !copies_on_shelf.length">
-                        <span class="detail_key">Call Number: </span>
-                        <span class="detail_value">{{copies.0.call_number}}</span>
+                    <div ng-show="item.abstract != ''">
+                        <div class="detail_key">Summary:</div>
+                        <div class="detail_value">{{item.abstract}}</div>
                     </div>
-                    <div ng-show="details.summary != null">
-                        <span class="detail_value">{{details.summary}}</span>
+                    <div ng-show="item.contents != ''">
+                        <div class="detail_key padtop">Contents:</div>
+                        <div class="detail_value">{{item.contents}}</div>
                     </div>
-                    <div ng-show="details.contents != null">
-                        <span class="detail_value">{{details.contents}}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="item" ng-show="copies_on_shelf.length && !$exposeAside.active">
-            <span class="detail_title">Copies on the shelf at</span>
-            <div ng-repeat="location in locations">
-                <span class="detail_key">{{location}}</span>
-                <div ng-repeat="copy in copies_on_shelf">
-                  <div class="row responsive-sm" ng-if="copy.location == location">
-                    {{copy.shelving_location}} &raquo; {{copy.call_number}}
-                  </div>
                 </div>
             </div>
         </div>
