@@ -21,18 +21,24 @@
                         <div ng-repeat="location in item.availability">
                             <span class="detail_key">{{location.library}}</span>
                             <div ng-repeat="copy in location.copies">
-                              <div class="row responsive-sm">
-                                {{copy.count}} in {{copy.shelf_location}} &raquo; {{copy.call_numbers.toString()}}
-                              </div>
+                                <div class="row responsive-sm">
+                                    {{copy.count}} {{copy.count==1?'copy':'copies'}} in {{copy.shelf_location}} &raquo; {{copy.call_numbers.toString()}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="padding-top" ng-show="item.holdings.length && !item.availability.length">
+                    <div class="padding-top" ng-show="item.holdings.length && !item.availability.length && item.electronic == false">
                         <span class="detail_key">Call Number: </span>
                         <span class="detail_value">{{item.call_number}}</span>
                     </div>
                     <div class="padding-top" ng-show="item.electronic != false">
                         <div class="detail_key">Electronic Resource</div>
+                    </div>
+                    <div ng-show="item.electronic == false && logged_in == true">
+                        <button id="hold_{{item.id}}" ng-show="logged_in" class="button button-positive" ng-click="place_hold(item.id)">Place Hold</button>
+                    </div>
+                    <div ng-show="item.electronic != false">
+                        <button class="button button-positive" ng-click="openLink(item.eresource)">Connect</button>
                     </div>
                 </div>
             </div>
