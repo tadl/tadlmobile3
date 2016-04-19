@@ -307,7 +307,7 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
 });
 
 // Home Controller
-app.controller('HomeCtrl', function($rootScope, $scope, $ionicSlideBoxDelegate, $http, popup, item_details, hold, login) {
+app.controller('HomeCtrl', function($rootScope, $scope, $ionicSlideBoxDelegate, $http, popup, hold, login) {
     var username = localStorage.getItem('username');
     var password = localStorage.getItem('password');
     if (password != null) { localStorage.removeItem('password'); }
@@ -629,7 +629,7 @@ app.controller('EventsCtrl', function($scope, $rootScope, $http, $ionicLoading, 
 });
 
 // Featured Items Controller
-app.controller('FeaturedCtrl',function($scope, $rootScope, $http, $ionicLoading, popup, hold, item_details) {
+app.controller('FeaturedCtrl',function($scope, $rootScope, $http, $ionicLoading, $ionicModal, itemDetail, popup, hold) {
     $scope.get_featured = function() {
         $rootScope.show_loading();
         $http({
@@ -644,9 +644,22 @@ app.controller('FeaturedCtrl',function($scope, $rootScope, $http, $ionicLoading,
             popup.alert('Oops', 'An error has occurred, please try again.');
         });
     };
-    $scope.item_details = function(record_id) {
-        item_details.show(record_id);
+
+    $scope.details = function(record_id) {
+        itemDetail.get(record_id).then(function(data) {
+            $scope.item = data;
+            $ionicModal.fromTemplateUrl('templates/item_modal.html', {
+                scope: $scope
+            }).then(function(modal) {
+                $scope.modal = modal;
+                modal.show();
+                $scope.closeModal = function() {
+                    modal.hide();
+                }
+            });
+        });
     };
+
     $scope.place_hold = function(record_id) {
         hold.place(record_id);
     };

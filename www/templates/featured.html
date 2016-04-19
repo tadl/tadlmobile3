@@ -13,10 +13,10 @@
                 <div class="col col-70">
                     <div style="float:right;margin-bottom:10px;text-align:right;" ng-hide="item.node.termid == 32">by {{item.node.author}}</div>
                     <div style="float:right;margin-bottom:10px;">
-                        <button id="hold_{{item.node.item}}" ng-show="logged_in" class="button button-positive" ng-click="place_hold('{{item.node.item}}')">Place Hold</button>
+                        <button class="button button-positive" ng-click="details(item.node.item)">More Info</button>
                     </div>
                     <div style="float:right;">
-                        <button class="button button-positive" ng-click="item_details('{{item.node.item}}')">More Info</button>
+                        <button id="hold_{{item.node.item}}" ng-show="logged_in" class="button button-positive" ng-click="place_hold('{{item.node.item}}')">Place Hold</button>
                     </div>
                 </div>
             </div>
