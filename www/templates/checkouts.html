@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="item">
-            <button class="button button-positive" ng-click="item_details('{{checkout.record_id}}')">Details</button>
+            <button class="button button-positive" ng-click="details(checkout.record_id)">Details</button>
             <button class="button button-balanced" ng-show="checkout.renew_attempts > 0" ng-click="renew('{{checkout.checkout_id}}')">Renew</button>
         </div>
     </div>

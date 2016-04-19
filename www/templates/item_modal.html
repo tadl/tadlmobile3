@@ -8,7 +8,9 @@
     <ion-content padding="true">
         <div class="item item-text-wrap">
             <div class="row">
-                <span class="detail_title">{{item.title}}</span>
+                <div class="col col-100">
+                    <span class="detail_title">{{item.title}}</span>
+                </div>
             </div>
             <div class="row">
                 <div class="col col-33">
@@ -46,14 +48,23 @@
             <div class="row">
                 <div class="col col-100">
                     <div ng-show="item.abstract != ''">
-                        <div class="detail_key">Summary:</div>
+                        <div class="detail_key">Summary</div>
                         <div class="detail_value">{{item.abstract}}</div>
                     </div>
                     <div ng-show="item.contents != ''">
-                        <div class="detail_key padtop">Contents:</div>
+                        <div class="detail_key padtop">Contents</div>
                         <div class="detail_value">{{item.contents}}</div>
                     </div>
                 </div>
+            </div>
+            <div class="row" ng-show="item.holdings.length">
+                <span class="detail_key">All holdings</span>
+            </div>
+            <div ng-repeat="holding in item.holdings" class="row">
+                <div class="col">{{holding.circ_lib.replace('TADL-', '')}}</div>
+                <div class="col">{{holding.location}}</div>
+                <div class="col">{{holding.call_number}}</div>
+                <div class="col">{{holding.status}}</div>
             </div>
         </div>
     </ion-content>

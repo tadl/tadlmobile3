@@ -256,13 +256,7 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
                     modal.hide();
                 }
             });
-
-            console.log($scope.item);
         });
-
-
-
-        //item_details.show(record_id);
     };
 
     $scope.showAlert = function(title,message) {
@@ -388,7 +382,7 @@ app.controller('AccountCtrl', function($scope, $rootScope, $http, $location, $io
 });
 
 // Holds Controller
-app.controller('HoldsCtrl', function($scope, $rootScope, $http, $ionicLoading, $q, item_details, popup, login) {
+app.controller('HoldsCtrl', function($scope, $rootScope, $http, $ionicLoading, $q, $ionicModal, itemDetail, popup, login) {
     $scope.holds = function() {
         var token = localStorage.getItem('token')
         $rootScope.show_loading('Loading&nbsp;holds...');
@@ -434,15 +428,27 @@ app.controller('HoldsCtrl', function($scope, $rootScope, $http, $ionicLoading, $
         });
     }
 
-    $scope.item_details = function(record_id) {
-        item_details.show(record_id);
+    $scope.details = function(record_id) {
+        itemDetail.get(record_id).then(function(data) {
+            $scope.item = data;
+            $ionicModal.fromTemplateUrl('templates/item_modal.html', {
+                scope: $scope
+            }).then(function(modal) {
+                $scope.modal = modal;
+                modal.show();
+                $scope.closeModal = function() {
+                    modal.hide();
+                }
+            });
+        });
     };
+
 
     $scope.holds();
 });
 
 // Checkout Controller
-app.controller('CheckoutCtrl', function($scope, $rootScope, $http, $ionicPopup, $ionicLoading, $q, item_details, login, popup) {
+app.controller('CheckoutCtrl', function($scope, $rootScope, $http, $ionicPopup, $ionicLoading, $q, itemDetail, $ionicModal, login, popup) {
     $scope.checkouts = function() {
         var token = localStorage.getItem('token')
         $rootScope.show_loading('Loading&nbsp;checkouts...');
@@ -501,8 +507,19 @@ app.controller('CheckoutCtrl', function($scope, $rootScope, $http, $ionicPopup, 
         });
     };
 
-    $scope.item_details = function(record_id) {
-        item_details.show(record_id);
+    $scope.details = function(record_id) {
+        itemDetail.get(record_id).then(function(data) {
+            $scope.item = data;
+            $ionicModal.fromTemplateUrl('templates/item_modal.html', {
+                scope: $scope
+            }).then(function(modal) {
+                $scope.modal = modal;
+                modal.show();
+                $scope.closeModal = function() {
+                    modal.hide();
+                }
+            });
+        });
     };
 
     $scope.renew = function(checkout_id) {

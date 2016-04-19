@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="item">
-            <button class="button button-positive" ng-click="item_details('{{hold.record_id}}')">Details</button>
+            <button class="button button-positive" ng-click="details(hold.record_id)">Details</button>
             <button class="button button-balanced" ng-click="change_hold('{{hold.hold_id}}','activate')" ng-show="hold.hold_status == 'Suspended'">Activate</button>
             <button class="button button-dark" ng-click="change_hold('{{hold.hold_id}}','suspend')" ng-show="hold.hold_status != 'Suspended' && hold.queue_status.indexOf('Available')">Suspend</button>
             <button class="button button-assertive" ng-click="confirm_{{hold.hold_id}} = 1" ng-hide="confirm_{{hold.hold_id}} == 1">Cancel</button>
