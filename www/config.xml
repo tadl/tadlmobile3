@@ -4,7 +4,8 @@
     version="3.0.04"
     versionCode="3004"
     xmlns="http://www.w3.org/ns/widgets"
-    xmlns:cdv="http://cordova.apache.org/ns/1.0" >
+    xmlns:cdv="http://cordova.apache.org/ns/1.0"
+    xmlns:gap="http://phonegap.com/ns/1.0" >
 
     <name>TADL</name>
 
@@ -19,8 +20,8 @@
     <gap:platform name="ios" />
     <gap:platform name="android" />
 
-    <content src="index.html"/>
-    <access origin="*"/>
+    <content src="index.html" />
+    <access origin="*" />
 
     <preference name="webviewbounce" value="false"/>
     <preference name="UIWebViewBounce" value="false"/>
