@@ -50,8 +50,8 @@
         <string>3001</string>
     </gap:config-file>
 
-    <gap:plugin name="com.ionic-for-phonegap.keyboard" spec="0.0.1" source="pgb" />
-    <gap:plugin name="org.apache.cordova.inappbrowser" version="1.4.0" />
+    <gap:plugin name="com.ionic.keyboard" spec="1.0.3" source="pgb" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.6.0" source="pgb" />
 
     <!-- ICONS -->
 
