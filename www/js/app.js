@@ -232,7 +232,11 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
             if (more == true) {
                 $scope.results = $scope.results.concat($scope.new_results);
                 $scope.page++;
-                $scope.$broadcast('scroll.infiniteScrollComplete');
+                $timeout(function() {
+                    $timeout(function() {
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                    });
+                });
             } else {
                 $scope.results = data.results;
                 $scope.page++;
