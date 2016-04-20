@@ -24,7 +24,7 @@
                             <span class="detail_key">{{location.library}}</span>
                             <div ng-repeat="copy in location.copies">
                                 <div class="row responsive-sm">
-                                    {{copy.count}} {{copy.count==1?'copy':'copies'}} in {{copy.shelf_location}} &raquo; {{copy.call_numbers.toString()}}
+                                    {{copy.count}} {{copy.count==1?'copy':'copies'}} in {{copy.shelf_location}} <br>&nbsp;&raquo;&nbsp; {{copy.call_numbers.toString()}}
                                 </div>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                     <div class="padding-top" ng-show="item.electronic != false">
                         <div class="detail_key">Electronic Resource</div>
                     </div>
-                    <div ng-show="item.electronic == false">
+                    <div class="right" ng-show="item.electronic == false">
                         <button ng-show="!logged_in" class="button button-positive" ng-click="closeModal()">Log in to place hold</button>
                         <button id="hold_{{item.id}}" ng-show="logged_in" class="button button-positive" ng-click="place_hold(item.id)">Place Hold</button>
                     </div>

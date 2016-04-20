@@ -146,3 +146,12 @@ img.logo {
     border-top-right-radius:0;
     border-bottom-right-radius:0;
 }
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+.clear {
+    clear: both;
+}

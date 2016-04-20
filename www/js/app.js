@@ -267,7 +267,7 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
         $scope.query = "";
         $timeout(function() {
             $('#searchBox').focus();
-        }, 0);
+        }, 1);
     }
 
     $scope.openLink = function(link) {
