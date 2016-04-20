@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget
     id="org.TADL.TADLMobile"
-    version="3.0.02"
-    versionCode="3002"
+    version="3.0.03"
+    versionCode="3003"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0" >
 
@@ -47,11 +47,11 @@
     </feature>
 
     <gap:config-file platform="ios" parent="CFBundleVersion">
-        <string>3002</string>
+        <string>3003</string>
     </gap:config-file>
 
-    <gap:plugin name="com.ionic.keyboard" spec="1.0.3" source="pgb" />
-    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.6.0" source="pgb" />
+    <gap:plugin name="com.ionic.keyboard" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
 
     <!-- ICONS -->
 
