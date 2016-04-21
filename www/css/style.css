@@ -155,8 +155,3 @@ img.logo {
 .clear {
     clear: both;
 }
-ion-infinite-scroll:not(.active) .spinner,
-ion-infinite-scroll:not(.active) .icon:before {
-    display: inline-block;
-}
-
