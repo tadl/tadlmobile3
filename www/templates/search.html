@@ -57,8 +57,8 @@
         </select>
     </label>
 </div>
-<div ng-repeat="result in results" item-width="100%" item-height="200">
-    <div class="card" style="height:190px;">
+<ion-list>
+    <ion-item collection-repeat="result in results" item-width="100%" item-height="200">
         <div class="row">
             <div class="col col-20">
                 <img class="cover_search_results" ng-src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{result.record_id}}" err-src="img/clocktower100.png" />
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </ion-item>
+</ion-list>
 
-<ion-infinite-scroll ng-if="more_results == true" on-infinite="search(true)" distance="1%"></ion-infinite-scroll>
+<ion-infinite-scroll ng-if="more_results == true" on-infinite="search(true)" immediate-check="false" distance="1%"></ion-infinite-scroll>
