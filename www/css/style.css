@@ -155,3 +155,11 @@ img.logo {
 .clear {
     clear: both;
 }
+
+h4.item-title {
+    line-height: 20px;
+    margin:0;
+    padding:0;
+    white-space: nowrap;
+    overflow: hidden;
+}
