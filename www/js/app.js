@@ -196,7 +196,7 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
             $scope.page = 0;
             $rootScope.show_loading('Searching...');
         } else {
-            $rootScope.show_loading('Loading more results...');
+            // we proceed with more results
         }
 
         var search_params = {};
