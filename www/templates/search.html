@@ -64,7 +64,7 @@
                 <img class="cover_search_results" ng-src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{result.record_id}}" err-src="img/clocktower100.png" />
             </div>
             <div class="col col-80">
-                <h4 class="item-title"><img ng-src="{{result.format_icon}}" err-src="img/clocktower100.png" /> {{result.title}}</h4>
+                <h2><img ng-src="{{result.format_icon}}" err-src="img/clocktower100.png" /> {{result.title}}</h2>
                 <p>{{result.author}}</p>
                 <div ng-show="result.availability.length && result.eresource == null">{{result.availability}}</div>
                 <div ng-show="result.call_number"><strong>{{result.call_number}}</strong></div>
