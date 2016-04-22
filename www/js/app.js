@@ -17,7 +17,7 @@ var webNews = ilsCatcherBase + 'web/news';
 var webNode = 'https://www.tadl.org/export/node/json/';
 var featuredItems = 'https://www.tadl.org/mobile/export/items/json/featured?mobi_bypass=1';
 
-var app = angular.module('egmobile', ['ionic', 'ngFitText', 'angularUtils.directives.dirPagination'])
+var app = angular.module('egmobile', ['ionic', 'ngFitText'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

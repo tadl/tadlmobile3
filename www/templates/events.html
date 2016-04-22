@@ -2,7 +2,7 @@
     <div class="list">
         <h1 class="item item-divider">Upcoming Events</h1>
     </div>	
-    <div class="card" dir-paginate="event in events | itemsPerPage: 10: 'events'" pagination-id="events">
+    <div class="card" ng-repeat="event in events">
         <div class="item">
             <h2 class="title">{{event.title}}</h2>
             <div class="row">
@@ -18,5 +18,4 @@
             </div>
         </div>
     </div>
-    <dir-pagination-controls on-page-change="scroll_top()" pagination-id="events"></dir-pagination-controls>
 </div>
