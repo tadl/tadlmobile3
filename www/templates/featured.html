@@ -7,14 +7,17 @@
             <h2 class="title">{{item.node.title}}</h2>
             <div class="row">
                 <div class="col col-30">
-                    <img ng-src="http://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{item.node.item}}" class="item_image" err-src="img/clocktower100.png" /><br>
+                    <img ng-src="http://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{item.node.item}}" class="item_image" err-src="img/clocktower100.png" />
+                    <div class="clearfix"></div>
                     <span style="font-size:0.7em;">{{item.node.term}}</span>
                 </div>
                 <div class="col col-70">
-                    <div class="right" style="margin-bottom:10px;text-align:right;" ng-hide="item.node.termid == 32">by {{item.node.author}}</div>
+                    <div class="right" style="margin-bottom:10px;text-align:right;" ng-hide="item.node.termid == 32">{{item.node.author}}</div>
+                    <div class="clearfix"></div>
                     <div class="right" style="margin-bottom:10px;">
                         <button class="button button-positive" ng-click="details(item.node.item)">More Info</button>
                     </div>
+                    <div class="clearfix"></div>
                     <div class="right">
                         <button id="hold_{{item.node.item}}" ng-show="logged_in" class="button button-positive" ng-click="place_hold('{{item.node.item}}')">Place Hold</button>
                     </div>
