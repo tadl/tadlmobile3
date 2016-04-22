@@ -60,13 +60,13 @@
             <div class="row" ng-show="item.holdings.length">
                 <span class="detail_key">All holdings</span>
             </div>
-            <div class="row">
+            <div class="row" ng-show="item.holdings.length">
                 <div class="col"><strong>Lib</strong></div>
                 <div class="col"><strong>Shelf</strong></div>
                 <div class="col"><strong>Call#</strong></div>
                 <div class="col"><strong>Status</strong></div>
             </div>
-            <div ng-repeat="holding in item.holdings" class="row">
+            <div ng-repeat="holding in item.holdings" ng-show="item.holdings.length" class="row">
                 <div class="col">{{holding.circ_lib.replace('TADL-', '')}}</div>
                 <div class="col">{{holding.location}}</div>
                 <div class="col">{{holding.call_number}}</div>
