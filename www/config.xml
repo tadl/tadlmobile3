@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget
-    id="org.TADL.TADL"
+    id="org.tadl.tadl"
     version="3.0.08"
     versionCode="3008"
     xmlns="http://www.w3.org/ns/widgets"
