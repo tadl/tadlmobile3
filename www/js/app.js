@@ -199,6 +199,10 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
             $rootScope.show_loading('Loading more results...');
             // we proceed with more results
         }
+        console.log($scope.query);
+        if ($scope.query == undefined || $scope.query == null) { $scope.query = ""; }
+        if ($stateParams.query == undefined || $stateParams.query == null) { $stateParams.query = ""; }
+        console.log($scope.query);
 
         var search_params = {};
         search_params['query'] = $scope.query;
@@ -208,14 +212,16 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
         search_params['loc'] = $scope.loc;
         search_params['qtype'] = $scope.qtype;
 
+/*
         if ($stateParams.query != $scope.query || $stateParams.format != $scope.format || $stateParams.sort != $scope.sort || $stateParams.availability != $scope.availability || $stateParams.loc != $scope.loc || $stateParams.qtype != $scope.qtype) {
             $scope.current_search = $scope.query;
             $location.path('/search').search(search_params);
             return;
         }
-
+*/
         search_params['page'] = $scope.page;
 
+        console.log(search_params);
         $http({
             method: 'GET',
             url: ilsSearchBasic,
@@ -290,14 +296,14 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
     $scope.place_hold = function(record_id) {
         hold.place(record_id);
     }
-
+/*
     $scope.query = $stateParams.query;
     $scope.format = $stateParams.format;
     $scope.sort = $stateParams.sort;
     $scope.availability = $stateParams.availability;
     $scope.loc = $stateParams.loc;
     $scope.qtype = $stateParams.qtype;
-
+*/
     if (($scope.format != 'all') || ($scope.sort != 'relevance') || ($scope.loc != '22') || ($scope.availability != 'off') || ($scope.qtype != 'keyword')) {
         $scope.advanced_search = true;
     }
