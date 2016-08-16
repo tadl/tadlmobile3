@@ -632,25 +632,33 @@ app.controller('EventsCtrl', function($scope, $rootScope, $http, $ionicLoading, 
     $scope.node_details = function(record_id) {
         node_details.show(record_id);
     };
+
     $scope.get_events();
 });
 
 // Featured Items Controller
 app.controller('FeaturedCtrl',function($scope, $rootScope, $http, $ionicLoading, $ionicModal, itemDetail, popup, hold) {
-    $scope.get_featured = function() {
+
+    $scope.get_featured = function(list_id) {
         $rootScope.show_loading();
         $http({
             method: 'GET',
-            url: featuredItems,
+            url: 'https://tadl-toolbox.apps.tadl.org/show_list.json?code=' + list_id,
             timeout: 15000,
         }).success(function(data) {
-            $scope.featured = data.nodes;
+            $scope.featured = data.items;
+            $scope.featured_title = data.list_name;
             $rootScope.hide_loading();
         }).error(function() {
             $rootScope.hide_loading();
             popup.alert('Oops', 'An error has occurred, please try again.');
         });
     };
+
+    $scope.clear_featured = function() {
+        $scope.featured = undefined;
+        $scope.featured_title = undefined;
+    }
 
     $scope.details = function(record_id) {
         itemDetail.get(record_id).then(function(data) {
@@ -670,7 +678,8 @@ app.controller('FeaturedCtrl',function($scope, $rootScope, $http, $ionicLoading,
     $scope.place_hold = function(record_id) {
         hold.place(record_id);
     };
-    $scope.get_featured();
+
+    // $scope.get_featured();
 });
 
 // News Controller

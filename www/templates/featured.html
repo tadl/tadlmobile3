@@ -2,24 +2,52 @@
     <div class="list">
         <h1 class="item item-divider">Featured Items</h1>
     </div>
-    <div class="card" ng-repeat="item in featured">
+    <div ng-if="!featured" class="card">
         <div class="item">
-            <h2 class="title">{{item.node.title}}</h2>
+            <h2 class="title">Books</h2>
+            <div class="row">
+                <div class="col col-100">
+                    <button class="button button-positive button-full" ng-click="get_featured('NewFiction')">New Fiction</button>
+                    <button class="button button-positive button-full" ng-click="get_featured('NewNon-fiction')">New Non-fiction</button>
+                    <button class="button button-positive button-full" ng-click="get_featured('NewLargePrint')">New Large Print</button>
+                    <button class="button button-positive button-full" ng-click="get_featured('NewAudiobooks')">New Audiobooks</button>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <h2 class="title">Movies &amp; TV</h2>
+            <div class="row">
+                <div class="col col-100">
+                    <button class="button button-positive button-full" ng-click="get_featured('dvds-hot')">Hot DVDs</button>
+                    <button class="button button-positive button-full" ng-click="get_featured('dvds-new')">New DVDs</button>
+                    <button class="button button-positive button-full" ng-click="get_featured('dvds-tcff')">Traverse City Film Festival</button>
+                    <button class="button button-positive button-full" ng-click="get_featured('NewYouthVideos')">New Youth Videos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-if="featured" class="card">
+        <h2 style="padding-left:10px;padding-top:5px;">{{featured_title}}<button style="float:right;margin-top:6px;margin-right:10px;" class="button-small button button-positive icon-left ion-chevron-left" ng-click="clear_featured()">Go back</button></h2> 
+    </div>
+    <div ng-if="featured" class="card" ng-repeat="item in featured">
+        <div class="item">
+            <h2 class="title">{{item.title}}</h2>
             <div class="row">
                 <div class="col col-30">
-                    <img ng-src="http://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{item.node.item}}" class="item_image" err-src="img/clocktower100.png" />
+                    <img ng-src="http://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{item.id}}" class="item_image" err-src="img/clocktower100.png" />
                     <div class="clearfix"></div>
-                    <span style="font-size:0.7em;">{{item.node.term}}</span>
                 </div>
                 <div class="col col-70">
-                    <div class="right" style="margin-bottom:10px;text-align:right;" ng-hide="item.node.termid == 32">{{item.node.author}}</div>
+                    <div class="right" style="margin-bottom:10px;text-align:right;" ng-hide="item.author == ''">{{item.author}}</div>
                     <div class="clearfix"></div>
                     <div class="right" style="margin-bottom:10px;">
-                        <button class="button button-positive" ng-click="details(item.node.item)">More Info</button>
+                        <button class="button button-positive" ng-click="details(item.id)">More Info</button>
                     </div>
                     <div class="clearfix"></div>
                     <div class="right">
-                        <button id="hold_{{item.node.item}}" ng-show="logged_in" class="button button-positive" ng-click="place_hold('{{item.node.item}}')">Place Hold</button>
+                        <button id="hold_{{item.iid}}" ng-show="logged_in" class="button button-positive" ng-click="place_hold('{{item.id}}')">Place Hold</button>
                     </div>
                 </div>
             </div>
