@@ -15,7 +15,26 @@
                 <span class="detail_value" ng-show="hold.hold_status == 'Suspended'">{{hold.hold_status}}</span>
             </div>
             <div>
+                <span class="detail_key">Queue position: </span>
                 <span class="detail_value">You are number {{hold.queue_state[0]}} in line.</span>
+            </div>
+            <div ng-hide="changing_hold == hold.hold_id && hold.queue_status.substring(0,6) != 'Availa'" ng-click="change_pickup({{hold.hold_id}})">
+                <span class="detail_key">Pickup location: </span>
+                <span class="detail_value">{{hold.pickup_location}} <button class="button button-small button-stable" ng-show="hold.queue_status.substring(0,6) != 'Availa'">change</button></span>
+            </div>
+            <div ng-show="changing_hold == hold.hold_id && hold.queue_status.substring(0,6) != 'Availa'">
+                <span class="detail_key">Change pickup location:</span>
+                <div class="list">
+                    <select ng-model="locValue" ng-change="submit_change(hold.hold_id, locValue, hold.hold_status, holds.indexOf(hold))">
+                        <option value="23" ng-selected="{{'Woodmere (Main) Branch' == hold.pickup_location}}">Woodmere</option>
+                        <option value="24" ng-selected="{{'Interlochen Public Library' == hold.pickup_location}}">Interlochen</option>
+                        <option value="25" ng-selected="{{'Kingsley Branch Library' == hold.pickup_location}}">Kingsley</option>
+                        <option value="26" ng-selected="{{'Peninsula Community Library' == hold.pickup_location}}">Peninsula</option>
+                        <option value="27" ng-selected="{{'Fife Lake Public Library' == hold.pickup_location}}">Fife Lake</option>
+                        <option value="28" ng-selected="{{'East Bay Branch Library' == hold.pickup_location}}">East Bay</option>
+                    </select>
+                    <button class="button button-small button-assertive" ng-click="cancel_change()" style="float:right;">Cancel change</button>
+                </div>
             </div>
         </div>
         <div class="item">

@@ -435,6 +435,47 @@ app.controller('HoldsCtrl', function($scope, $rootScope, $http, $ionicLoading, $
         });
     }
 
+    $scope.change_pickup = function(hold_id) {
+        var token = localStorage.getItem('token');
+        $scope.changing_hold = hold_id;
+    }
+
+    $scope.locValue = 23;
+
+    $scope.submit_change = function(hold_id, loc_id, hold_state, hold_num) {
+        var token = localStorage.getItem('token');
+        if (hold_state == 'Active') {
+            var holdstate = 'f';
+        } else {
+            var holdstate = 't';
+        }
+        $rootScope.show_loading();
+        $http({
+            method: 'GET',
+            url: 'https://catalog.tadl.org/main/update_hold_pickup.json',
+            params: {"token": token, "hold_id": hold_id, "new_pickup": loc_id, "hold_state": holdstate},
+            timeout: 15000,
+        }).success(function(data) {
+            $rootScope.hide_loading();
+            if (data.message != "Invalid token") {
+                $scope.holds[hold_num] = data;
+                $scope.changing_hold = undefined;
+            } else {
+                login.login();
+                popup.alert('Temporary error', 'The system encountered a temporary error, but it should be resolved now. Please try that again.');
+            }
+            //location.reload();
+        }).error(function() {
+            $rootScope.hide_loading();
+            popup.alert('Oops', 'An error has occurred, please try again.');
+        });
+
+    }
+
+    $scope.cancel_change = function() {
+        $scope.changing_hold = undefined;
+    }
+
     $scope.details = function(record_id) {
         itemDetail.get(record_id).then(function(data) {
             $scope.item = data;
@@ -470,6 +511,7 @@ app.controller('CheckoutCtrl', function($scope, $rootScope, $http, $ionicPopup, 
                 var rightnow = moment().format("YYYY-MM-DD");
                 var renewids = [];
                 var dueids = [];
+                var renewitems = [];
                 jQuery.each(data.checkouts, function() {
                     var due = moment(this.iso_due_date).format("YYYY-MM-DD");
                     if (due < rightnow) {
@@ -479,6 +521,7 @@ app.controller('CheckoutCtrl', function($scope, $rootScope, $http, $ionicPopup, 
                     if ((this.overdue == true) && (this.renew_attempts > 0)) {
                         this.renew_urgent = true;
                         renewids.push(Number(this.checkout_id));
+                        renewitems.push(Number(this.record_id));
                     } else { this.renew_urgent = false; }
                 });
                 var renewall = sessionStorage.getItem('renewall');
@@ -497,7 +540,7 @@ app.controller('CheckoutCtrl', function($scope, $rootScope, $http, $ionicPopup, 
                     });
                     confirmPopup.then(function(res) {
                         if (res) {
-                            $scope.renew(renewids.toString());
+                            $scope.renew(renewids.toString(),renewitems.toString());
                         } else {
                             sessionStorage.setItem('renewall', 'nope');
                         }
@@ -529,13 +572,13 @@ app.controller('CheckoutCtrl', function($scope, $rootScope, $http, $ionicPopup, 
         });
     };
 
-    $scope.renew = function(checkout_id) {
+    $scope.renew = function(checkout_id,record_id) {
         $rootScope.show_loading('Renewing...');
         var token = localStorage.getItem('token');
         $http({
             method: 'GET',
-            url: ilsAccountRenew,
-            params: {"token": token, "circ_ids": checkout_id},
+            url: 'https://catalog.tadl.org/main/renew_checkouts.json',
+            params: {"token": token, "checkout_ids": checkout_id, "record_ids": record_id},
             timeout: 15000,
         }).success(function(data) {
             $rootScope.hide_loading();
@@ -552,7 +595,7 @@ app.controller('CheckoutCtrl', function($scope, $rootScope, $http, $ionicPopup, 
                     } else { this.renew_urgent = false; }
                 });
                 var renewresponse = "";
-                if (data.confirmation != null) { renewresponse += data.confirmation + '<br/>'; }
+                if (data.message != null) { renewresponse += data.message + '<br/>'; }
                 if (data.errors.length >= 1) {
                     var errcount = 0;
                     jQuery.each(data.errors, function() {
