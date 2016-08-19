@@ -20,7 +20,7 @@
             </div>
             <div ng-hide="changing_hold == hold.hold_id && hold.queue_status.substring(0,6) != 'Availa'" ng-click="change_pickup({{hold.hold_id}})">
                 <span class="detail_key">Pickup location: </span>
-                <span class="detail_value">{{hold.pickup_location}} <button class="button button-small button-stable" ng-show="hold.queue_status.substring(0,6) != 'Availa'">change</button></span>
+                <span class="detail_value">{{hold.pickup_location}} <span ng-show="hold.queue_status.substring(0,6) != 'Availa'">(Tap to change)</span></span>
             </div>
             <div ng-show="changing_hold == hold.hold_id && hold.queue_status.substring(0,6) != 'Availa'">
                 <span class="detail_key">Change pickup location:</span>
