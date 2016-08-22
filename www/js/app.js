@@ -457,8 +457,8 @@ app.controller('HoldsCtrl', function($scope, $rootScope, $http, $ionicLoading, $
             timeout: 15000,
         }).success(function(data) {
             $rootScope.hide_loading();
-            if (data.message != "Invalid token") {
-                $scope.holds[hold_num] = data;
+            if (data.message != "bad login") {
+                $scope.holds[hold_num] = data.message;
                 $scope.changing_hold = undefined;
             } else {
                 login.login();
@@ -680,7 +680,7 @@ app.controller('EventsCtrl', function($scope, $rootScope, $http, $ionicLoading, 
 });
 
 // Featured Items Controller
-app.controller('FeaturedCtrl',function($scope, $rootScope, $http, $ionicLoading, $ionicModal, itemDetail, popup, hold) {
+app.controller('FeaturedCtrl',function($scope, $rootScope, $http, $ionicLoading, $ionicScrollDelegate, $ionicModal, itemDetail, popup, hold) {
 
     $scope.get_featured = function(list_id) {
         $rootScope.show_loading();
@@ -692,6 +692,7 @@ app.controller('FeaturedCtrl',function($scope, $rootScope, $http, $ionicLoading,
             $scope.featured = data.items;
             $scope.featured_title = data.list_name;
             $rootScope.hide_loading();
+            $ionicScrollDelegate.scrollTop();
         }).error(function() {
             $rootScope.hide_loading();
             popup.alert('Oops', 'An error has occurred, please try again.');
