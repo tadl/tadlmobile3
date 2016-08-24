@@ -51,6 +51,8 @@
         <string>3104</string>
     </gap:config-file>
 
+    <gap:plugin name="cordova-plugin-inappbrowser" source="npm"/>
+    <gap:plugin name="cordova-plugin-ionic-keyboard" source="pgb"/>
 
     <!-- ICONS -->
 
