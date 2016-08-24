@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget
     id="org.TADL.TADL"
-    version="3.1.10"
-    versionCode="3110"
+    version="3.1.11"
+    versionCode="3111"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
     xmlns:gap="http://phonegap.com/ns/1.0" >
@@ -52,7 +52,7 @@
     </feature>
 
     <gap:config-file platform="ios" parent="CFBundleVersion">
-        <string>3110</string>
+        <string>3111</string>
     </gap:config-file>
 
     <gap:plugin name="cordova-plugin-splashscreen" source="npm"/>
@@ -94,31 +94,30 @@
     <!-- SPLASH -->
 
     <!-- Default -->
-    <gap:splash src="res/splash/default.png" />
 
     <platform name="ios">
         <!-- iPhone and iPod touch -->
-        <gap:splash src="res/splash/ios/Default.png" width="320" height="480" />
-        <gap:splash src="res/splash/ios/Default@2x.png" width="640" height="960" />
+        <splash src="res/splash/ios/Default.png" width="320" height="480" />
+        <splash src="res/splash/ios/Default@2x.png" width="640" height="960" />
 
         <!-- iPhone 5 / iPod Touch (5th Generation) -->
-        <gap:splash src="res/splash/ios/Default-568h@2x.png" width="640" height="1136" />
+        <splash src="res/splash/ios/Default-568h@2x.png" width="640" height="1136" />
 
         <!-- iPad -->
-        <gap:splash src="res/splash/ios/Default-Portrait.png" width="768" height="1024" />
-        <gap:splash src="res/splash/ios/Default-Landscape.png" width="1024" height="768" />
+        <splash src="res/splash/ios/Default-Portrait.png" width="768" height="1024" />
+        <splash src="res/splash/ios/Default-Landscape.png" width="1024" height="768" />
 
         <!-- Retina iPad -->
-        <gap:splash src="res/splash/ios/Default-Portrait@2x.png" width="1536" height="2048" />
-        <gap:splash src="res/splash/ios/Default-Landscape@2x.png" width="2048" height="1536" />
+        <splash src="res/splash/ios/Default-Portrait@2x.png" width="1536" height="2048" />
+        <splash src="res/splash/ios/Default-Landscape@2x.png" width="2048" height="1536" />
     </platform>
 
     <platform name="android">
         <!-- Android -->
-        <gap:splash src="res/splash/android/ldpi.png" gap:qualifier="port-ldpi" />
-        <gap:splash src="res/splash/android/mdpi.png" gap:qualifier="port-mdpi" />
-        <gap:splash src="res/splash/android/hdpi.png" gap:qualifier="port-hdpi" />
-        <gap:splash src="res/splash/android/xhdpi.png" gap:qualifier="port-xhdpi" />
+        <splash src="res/splash/android/ldpi.png" gap:qualifier="ldpi" />
+        <splash src="res/splash/android/mdpi.png" gap:qualifier="mdpi" />
+        <splash src="res/splash/android/hdpi.png" gap:qualifier="hdpi" />
+        <splash src="res/splash/android/xhdpi.png" gap:qualifier="xhdpi" />
     </platform>
 
 </widget>
