@@ -427,7 +427,7 @@ app.controller('HoldsCtrl', function($scope, $rootScope, $http, $ionicLoading, $
                 $rootScope.user_basic['holds'] = data.count;
             } else {
                 login.login();
-                popup.alert('Temporary error', 'The system encountered a temporary error, but it should be resolved now. Please try that again.');
+                setTimeout($scope.change_hold(hold_id, task), 2500);
             }
         }).error(function() {
             $rootScope.hide_loading();
@@ -462,7 +462,7 @@ app.controller('HoldsCtrl', function($scope, $rootScope, $http, $ionicLoading, $
                 $scope.changing_hold = undefined;
             } else {
                 login.login();
-                popup.alert('Temporary error', 'The system encountered a temporary error, but it should be resolved now. Please try that again.');
+                setTimeout($scope.submit_change(hold_id, loc_id, hold_state, hold_num), 2500);
             }
             //location.reload();
         }).error(function() {
