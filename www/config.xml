@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget
     id="org.TADL.TADL"
-    version="3.1.09"
-    versionCode="3109"
+    version="3.1.10"
+    versionCode="3110"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
     xmlns:gap="http://phonegap.com/ns/1.0" >
@@ -52,7 +52,7 @@
     </feature>
 
     <gap:config-file platform="ios" parent="CFBundleVersion">
-        <string>3109</string>
+        <string>3110</string>
     </gap:config-file>
 
     <gap:plugin name="cordova-plugin-splashscreen" source="npm"/>
@@ -94,7 +94,7 @@
     <!-- SPLASH -->
 
     <!-- Default -->
-    <splash src="res/splash/default.png" />
+    <gap:splash src="res/splash/default.png" />
 
     <platform name="ios">
         <!-- iPhone and iPod touch -->

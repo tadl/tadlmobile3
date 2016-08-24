@@ -24,7 +24,9 @@ var app = angular.module('egmobile', ['ionic', 'ngFitText'])
         if(window.StatusBar) {
             StatusBar.styleDefault();
         }
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+        if(window.cordova) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+        }
     });
 })
 
