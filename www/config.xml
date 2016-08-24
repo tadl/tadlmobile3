@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget
     id="org.TADL.TADL"
-    version="3.1.13"
-    versionCode="3113"
+    version="3.1.14"
+    versionCode="3114"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
     xmlns:gap="http://phonegap.com/ns/1.0" >
@@ -29,7 +29,7 @@
     <preference name="android-minSdkVersion" value="16"/>
     <preference name="BackupWebStorage" value="none"/>
     <preference name="permissions" value="none"/>
-    <preference name="phonegap-version" value="cli-6.3.0"/>
+    <preference name="phonegap-version" value="cli-5.4.1"/>
     <preference name="orientation" value="portrait"/>
     <preference name="target-device" value="universal"/>
     <preference name="fullscreen" value="true"/>
@@ -52,7 +52,7 @@
     </feature>
 
     <gap:config-file platform="ios" parent="CFBundleVersion">
-        <string>3113</string>
+        <string>3114</string>
     </gap:config-file>
 
     <gap:plugin name="cordova-plugin-splashscreen" source="npm"/>
