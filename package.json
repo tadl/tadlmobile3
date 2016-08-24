@@ -1,6 +1,6 @@
 {
   "name": "tadlmobile3",
-  "version": "3.1.02",
+  "version": "3.1.04",
   "description": "tadlmobile3: An Ionic project",
   "dependencies": {
     "gulp": "^3.5.6",
