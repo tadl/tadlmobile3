@@ -24,9 +24,7 @@ var app = angular.module('egmobile', ['ionic', 'ngFitText'])
         if(window.StatusBar) {
             StatusBar.styleDefault();
         }
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.keyboard.hideKeyboardAccessoryBar(false);
-        }
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
     });
 })
 
@@ -197,15 +195,15 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
         if (more != true) {
             $scope.current_page = 1
             $scope.page = 0;
+            if (window.cordova) { cordova.plugins.Keyboard.close(); }
+            $scope.advanced_search = false;
             $rootScope.show_loading('Searching...');
         } else {
             $rootScope.show_loading('Loading more results...');
             // we proceed with more results
         }
-        console.log($scope.query);
         if ($scope.query == undefined || $scope.query == null) { $scope.query = ""; }
         if ($stateParams.query == undefined || $stateParams.query == null) { $stateParams.query = ""; }
-        console.log($scope.query);
 
         var search_params = {};
         search_params['query'] = $scope.query;
@@ -214,17 +212,8 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
         search_params['availability'] = $scope.availability;
         search_params['loc'] = $scope.loc;
         search_params['qtype'] = $scope.qtype;
-
-/*
-        if ($stateParams.query != $scope.query || $stateParams.format != $scope.format || $stateParams.sort != $scope.sort || $stateParams.availability != $scope.availability || $stateParams.loc != $scope.loc || $stateParams.qtype != $scope.qtype) {
-            $scope.current_search = $scope.query;
-            $location.path('/search').search(search_params);
-            return;
-        }
-*/
         search_params['page'] = $scope.page;
 
-        console.log(search_params);
         $http({
             method: 'GET',
             url: ilsSearchBasic,
