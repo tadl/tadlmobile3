@@ -24,9 +24,6 @@ var app = angular.module('egmobile', ['ionic', 'ngFitText'])
         if(window.StatusBar) {
             StatusBar.styleDefault();
         }
-        if(window.cordova) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
-        }
     });
 })
 
@@ -197,7 +194,6 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
         if (more != true) {
             $scope.current_page = 1
             $scope.page = 0;
-            if (window.cordova) { cordova.plugins.Keyboard.close(); }
             $scope.advanced_search = false;
             $rootScope.show_loading('Searching...');
         } else {
