@@ -52,7 +52,7 @@
 
     <gap:plugin name="com.ionic.keyboard" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
-    <gap:plugin name="cordova-plugin-whitelist"/>
+    <gap:plugin name="com.indigoway.cordova.whitelist.whitelistplugin" source="pgb"/>
 
     <allow-navigation href="*" />
     <allow-intent href="*" />
