@@ -232,6 +232,7 @@ app.controller('SearchCtrl', function($scope, $rootScope, $http, $location, $sta
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             } else {
                 $scope.results = $scope.new_results;
+                cordova.plugins.Keyboard.close();
                 $scope.page++;
             }
             $rootScope.hide_loading();
