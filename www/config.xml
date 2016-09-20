@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget
     id="org.TADL.TADLMobile"
-    version="3.1.17"
-    versionCode="3117"
+    version="3.1.18"
+    versionCode="3118"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
     xmlns:gap="http://phonegap.com/ns/1.0" >
@@ -31,7 +31,7 @@
     <preference name="phonegap-version" value="cli-6.3.0"/>
     <preference name="orientation" value="portrait"/>
     <preference name="target-device" value="universal"/>
-    <preference name="fullscreen" value="true"/>
+    <preference name="fullscreen" value="false"/>
     <preference name="prerendered-icon" value="true"/>
     <preference name="stay-in-webview" value="false"/>
     <preference name="ios-statusbarstyle" value="black-opaque"/>
@@ -41,13 +41,12 @@
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
 
-
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true"/>
     </feature>
 
     <gap:config-file platform="ios" parent="CFBundleVersion">
-        <string>3117</string>
+        <string>3118</string>
     </gap:config-file>
 
     <gap:plugin name="com.ionic.keyboard" />
