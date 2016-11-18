@@ -776,8 +776,11 @@ app.factory('login', function($http, $rootScope, popup) {
                 $rootScope.hide_loading();
                 if (data.message == 'login failed' || data.message == 'failed' ) {
                     localStorage.removeItem('token');
+                    localStorage.removeItem('hash');
+                    localStorage.removeItem('username');
                     $rootScope.logged_in = false;
                     $rootScope.user_basic = {};
+                    popup.alert('Login Failed', 'Your username and/or password are incorrect. Please try again.');
                 } else {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('card', data.card);
