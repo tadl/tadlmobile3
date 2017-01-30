@@ -320,7 +320,10 @@ app.controller('AccountCtrl', function($scope, $rootScope, $http, $location, $io
 
     $scope.logout = function() {
         var token = localStorage.getItem('token');
-        localStorage.clear();
+        localStorage.removeItem('card');
+        localStorage.removeItem('hash');
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
         $rootScope.logged_in = false;
         $rootScope.user_basic = {};
         $http({
