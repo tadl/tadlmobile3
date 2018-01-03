@@ -50,8 +50,8 @@
         <string>4101</string>
     </gap:config-file>
 
-    <gap:plugin name="com.ionic.keyboard" />
-    <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <gap:plugin name="ionic-plugin-keyboard" source="npm"/>
+    <gap:plugin name="cordova-plugin-inappbrowser" source="npm"/>
     <gap:plugin name="cordova-plugin-whitelist" source="npm"/>
 
     <allow-navigation href="*" />
