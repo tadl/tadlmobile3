@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget
     id="org.TADL.TADLMobile"
-    version="3.1.20"
-    versionCode="3120"
+    version="4.1.01"
+    versionCode="4101"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
     xmlns:gap="http://phonegap.com/ns/1.0" >
@@ -26,6 +26,7 @@
     <preference name="UIWebViewBounce" value="true"/>
     <preference name="DisallowOverscroll" value="false"/>
     <preference name="android-minSdkVersion" value="16"/>
+    <preference name="android-maxSdkVersion" value="22"/>
     <preference name="BackupWebStorage" value="none"/>
     <preference name="permissions" value="none"/>
     <preference name="phonegap-version" value="cli-6.3.0"/>
@@ -46,12 +47,12 @@
     </feature>
 
     <gap:config-file platform="ios" parent="CFBundleVersion">
-        <string>3120</string>
+        <string>4101</string>
     </gap:config-file>
 
     <gap:plugin name="com.ionic.keyboard" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
-    <gap:plugin name="com.indigoway.cordova.whitelist.whitelistplugin" source="pgb"/>
+    <gap:plugin name="cordova-plugin-whitelist" source="npm"/>
 
     <allow-navigation href="*" />
     <allow-intent href="*" />
