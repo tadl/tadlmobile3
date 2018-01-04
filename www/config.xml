@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget
     id="org.TADL.TADLMobile"
-    version="4.1.01"
-    versionCode="40101"
+    version="4.1.03"
+    versionCode="40103"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
     xmlns:gap="http://phonegap.com/ns/1.0" >
@@ -46,7 +46,7 @@
     </feature>
 
     <gap:config-file platform="ios" parent="CFBundleVersion">
-        <string>40101</string>
+        <string>40103</string>
     </gap:config-file>
 
     <gap:plugin name="ionic-plugin-keyboard" source="npm"/>
