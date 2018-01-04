@@ -28,7 +28,6 @@
     <preference name="android-minSdkVersion" value="16"/>
     <preference name="android-maxSdkVersion" value="22"/>
     <preference name="BackupWebStorage" value="none"/>
-    <preference name="permissions" value="none"/>
     <preference name="phonegap-version" value="cli-6.3.0"/>
     <preference name="orientation" value="portrait"/>
     <preference name="target-device" value="universal"/>
@@ -47,7 +46,7 @@
     </feature>
 
     <gap:config-file platform="ios" parent="CFBundleVersion">
-        <string>4101</string>
+        <string>40101</string>
     </gap:config-file>
 
     <gap:plugin name="ionic-plugin-keyboard" source="npm"/>
