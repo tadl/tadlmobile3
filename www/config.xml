@@ -29,6 +29,7 @@
     <preference name="android-maxSdkVersion" value="22"/>
     <preference name="BackupWebStorage" value="none"/>
     <preference name="phonegap-version" value="cli-6.3.0"/>
+    <preference name="permissions" value="none"/>
     <preference name="orientation" value="portrait"/>
     <preference name="target-device" value="universal"/>
     <preference name="fullscreen" value="false"/>
@@ -52,6 +53,7 @@
     <gap:plugin name="ionic-plugin-keyboard" source="npm"/>
     <gap:plugin name="cordova-plugin-inappbrowser" source="npm"/>
     <gap:plugin name="cordova-plugin-whitelist" source="npm"/>
+    <gap:plugin name="cordova-plugin-android-permissions" source="npm"/>
 
     <allow-navigation href="*" />
     <allow-intent href="*" />
